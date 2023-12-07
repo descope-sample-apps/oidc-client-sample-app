@@ -1,4 +1,4 @@
-This is a sample app showing authentication via OIDC using Descope's hosted authentication flow page. It's written in NextJS.
+This is a sample app showcasing authentication via OIDC using Descope's hosted authentication flow page. It's written in NextJS.
 
 ## Getting Started
 
