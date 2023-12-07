@@ -1,7 +1,7 @@
 import { client_id } from "@/app/utils";
 import { cookies } from "next/headers";
 
-export async function GET(request: Request, response: Response) {
+export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const code = searchParams.get('code');
     const state = searchParams.get('state');
@@ -25,13 +25,11 @@ export async function GET(request: Request, response: Response) {
     const data = await res.json()
 
     const { access_token, id_token, refresh_token, expires_in  } = data;
-    cookies().set('id_token', id_token)
-    cookies().set('access_token', access_token)
-    cookies().set('refresh_token', refresh_token)
-    cookies().set('expires_in', expires_in)
 
-    // TODO: Set cookies securely, ex:
-    // cookies().set('id_token', id_token, { httpOnly: true, secure: true, sameSite: 'lax' })
+    cookies().set('id_token', id_token, { httpOnly: true, secure: true, sameSite: 'lax' })
+    cookies().set('access_token', access_token, { httpOnly: true, secure: true, sameSite: 'lax' })
+    cookies().set('refresh_token', refresh_token, { httpOnly: true, secure: true, sameSite: 'lax' })
+    cookies().set('expires_in', expires_in, { httpOnly: true, secure: true, sameSite: 'lax' })
 
 
     return new Response(null, {

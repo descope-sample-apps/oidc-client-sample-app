@@ -18,14 +18,3 @@ npm run dev
 ```
 
 Now, Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-
-### Note
-The tokens returned from successful authentication via OIDC are simply stored via cookies directly without 
-important security considerations like http only, secure, or same site lax. This is to streamline the testing
-process.
-
-In a production you should set httpOnly to `true`, secure to `true`, and sameSite to `Lax`.
-```
-cookies().set('id_token', id_token, { httpOnly: true, secure: true, sameSite: 'lax' });
-```

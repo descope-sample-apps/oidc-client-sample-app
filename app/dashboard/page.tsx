@@ -1,16 +1,7 @@
 'use client'
 
-import { useEffect } from "react"
-import { API_URL } from "../utils";
-
 export default function Page() {
-
-    function getCookie(name: string) {
-        let matches = document.cookie.match(new RegExp(
-            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-        ));
-        return matches ? decodeURIComponent(matches[1]) : undefined;
-    }
+    // Example user info request for use in route handler
     const getUserInfo = async (access_token: string) => {
         const userInfoUrl = 'https://api.descope.com/oauth2/v1/userinfo';
 
@@ -22,26 +13,12 @@ export default function Page() {
         })
         if (!res.ok) {
             console.log("Error getting user info")
-            if (res.status === 401) {
-                console.log("User not authorized")
-                window.location.href = API_URL;
-            }
             return;
         } 
         const data = await res.json();
+        console.log(data);
     }
-    
-    const getLogoutUrl = () => {
-        const id_token = getCookie('id_token');
-        const logoutUrl = `https://api.descope.com/oauth2/v1/logout?id_token_hint=${id_token}&post_logout_redirect_uri=` + API_URL;
-        return logoutUrl;
-    }
-    useEffect(() => {
-        const accessToken = getCookie('access_token');
-        if (accessToken) {
-            getUserInfo(accessToken);
-        }
-    }, [])
+
 
     return <div className="w-full h-ful mt-20 text-center">
         <h1 className="font-bold text-xl">You are logged in!</h1>
@@ -49,9 +26,7 @@ export default function Page() {
         <button 
         className="bg-gray-800 rounded-md px-2 py-2"
         onClick={() => {
-            const logoutUrl = getLogoutUrl();
-
-            window.location.href = logoutUrl;
+            window.location.href = 'api/auth/logout';
         }}>Log out</button>
     </div>
 }
