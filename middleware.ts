@@ -9,7 +9,7 @@ export function middleware(request: NextRequest) {
   // In production you should validate the access token here (signature, etc).
   // We simply check the expiration date
 
-  if (pathName === '/' && access_token) {
+  if (pathName === '/' && access_token && !isJwtExpired(access_token)) {
     return NextResponse.redirect(new URL('/dashboard', request.url))
   }
   if (pathName === '/dashboard' && (!access_token || isJwtExpired(access_token))) {
