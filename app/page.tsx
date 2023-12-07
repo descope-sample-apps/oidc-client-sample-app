@@ -45,9 +45,9 @@ export default function Home() {
 
 
   return (
-    <>
-      <button onClick={onClick}>Login via OIDC</button>
-    </>
+    <div className="w-full h-ful mt-20 text-center">
+      <button onClick={onClick} className="bg-white px-4 py-2 text-black rounded-md">Login via OIDC</button>
+    </div>
   )
 }
 
