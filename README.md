@@ -22,7 +22,11 @@ Now, Open [http://localhost:3000](http://localhost:3000) with your browser to se
 ## Features
 ### Log in via OIDC
 
-This entails redirecting to a Descope OIDC authorize endpoint which includes: generating a code challenge and verifier and including those along with your Descope Project ID and a callback url. The callback url is also included at `/api/auth/callback` and parses the code verifier and token returned via Descope OIDC after successful authentication. Then, it sets the `id_token`, `access_token`, `refresh_token`, and `expires_in` to cookies before redirecting to the dashboard.
+This entails redirecting to a Descope OIDC authorize endpoint which includes: 
+1. A code challenge and verifier, both cryptographically random strings for challenge-response validation
+2. Your [Descope Project ID](https://app.descope.com/settings/project) 
+3. A callback url. This url is defined in a Route Handler in your project at `/api/auth/callback` and parses the code verifier and token returned via Descope OIDC after successful authentication. Then, it sets the `id_token`, `access_token`, `refresh_token`, and `expires_in` to cookies before redirecting to the dashboard.
+
 ### Log out via OIDC
   
 This entails redirecting to `/api/auth/logout` which then fetches the `id_token` from the cookies before clearing them. Then it redirects to Descope's OIDC logout endpoint with the `id_token` as a parameter along with the url to return to after successful log out.
