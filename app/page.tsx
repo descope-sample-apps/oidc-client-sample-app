@@ -46,6 +46,8 @@ export default function Home() {
 
   return (
     <div className="w-full h-ful mt-20 text-center">
+              <h1 className="font-bold text-xl mb-4">Welcome to Descope&apos;s OIDC Sample App</h1>
+
       <button onClick={onClick} className="bg-white px-4 py-2 text-black rounded-md">Login via OIDC</button>
     </div>
   )
