@@ -27,5 +27,5 @@ process.
 
 In a production you should set httpOnly to `true`, secure to `true`, and sameSite to `Lax`.
 ```
-cookies().set('id_token', id_token, { httpOnly: true, secure: true, sameSite: 'Lax' });
+cookies().set('id_token', id_token, { httpOnly: true, secure: true, sameSite: 'lax' });
 ```
