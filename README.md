@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a sample app showing authentication via OIDC using Descope's hosted authentication flow page. It's written in NextJS.
 
 ## Getting Started
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+First, add your [Descope Project ID](https://app.descope.com/settings/project) to a `.env` file in the root folder.
+
+```
+NEXT_PUBLIC_DESCOPE_PROJECT_ID=<your_project_id>
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Second, install packages, and run the development server:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+npm i
+npm run dev
+```
 
-## Learn More
+Now, Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Note
+The tokens returned from successful authentication via OIDC are simply stored via cookies directly without 
+important security considerations like http only, secure, or same site lax. This is to streamline the testing
+process.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+In a production you should set httpOnly to `true`, secure to `true`, and sameSite to `Lax`.
+```
+cookies().set('id_token', id_token, { httpOnly: true, secure: true, sameSite: 'Lax' });
+```

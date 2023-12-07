@@ -14,7 +14,6 @@ export default function Page() {
     const getUserInfo = async (access_token: string) => {
         const userInfoUrl = 'https://api.descope.com/oauth2/v1/userinfo';
 
-        console.log("Get user info")
         const res = await fetch(userInfoUrl, {
         method: 'GET',
             headers: {
