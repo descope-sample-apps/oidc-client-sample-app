@@ -30,6 +30,10 @@ export async function GET(request: Request, response: Response) {
     cookies().set('refresh_token', refresh_token)
     cookies().set('expires_in', expires_in)
 
+    // TODO: Set cookies securely, ex:
+    // cookies().set('id_token', id_token, { httpOnly: true, secure: true, sameSite: 'lax' })
+
+
     return new Response(null, {
         status: 302,
         headers: {
