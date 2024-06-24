@@ -30,9 +30,14 @@ export default function Home() {
   const getAuthUrl = async () => {
     const codeVerifier = generateCodeVerifier();
     const codeChallenge = await generateCodeChallenge(codeVerifier);
+    let baseURL = "api.descope.com"
+    if (process.env.NEXT_PUBLIC_DESCOPE_PROJECT_ID && process.env.NEXT_PUBLIC_DESCOPE_PROJECT_ID.length >= 32) {
+      const localURL = process.env.NEXT_PUBLIC_DESCOPE_PROJECT_ID.substring(1, 5)
+      baseURL = [baseURL.slice(0, 4), localURL, ".", baseURL.slice(4)].join('') 
+    }
 
     const redirect_uri = API_URL + '/api/auth/callback';
-    const authUrl = `https://api.descope.com/oauth2/v1/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirect_uri}&scope=openid&code_challenge=${codeChallenge}&code_challenge_method=S256&state=${codeVerifier}`;
+    const authUrl = `https://${baseURL}/oauth2/v1/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirect_uri}&scope=openid&code_challenge=${codeChallenge}&code_challenge_method=S256&state=${codeVerifier}`;
     console.log(authUrl);
     
     return authUrl;
