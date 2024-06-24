@@ -6,7 +6,12 @@ export async function GET(request: Request) {
     const code = searchParams.get('code');
     const state = searchParams.get('state');
 
-    const tokenUrl = 'https://api.descope.com/oauth2/v1/token';
+    let baseURL = "api.descope.com"
+    if (process.env.NEXT_PUBLIC_DESCOPE_PROJECT_ID.length >= 32) {
+        const localURL = process.env.NEXT_PUBLIC_DESCOPE_PROJECT_ID.substring(1, 5)
+        baseURL = [baseURL.slice(0, 4), localURL, ".", baseURL.slice(4)].join('') 
+    }
+    const tokenUrl = `https://${baseURL}/oauth2/v1/token`;
 
     const tokenData = {
         grant_type: 'authorization_code',

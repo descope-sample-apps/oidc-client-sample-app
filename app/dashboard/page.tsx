@@ -3,7 +3,12 @@
 export default function Page() {
     // Example user info request for use in route handler
     const getUserInfo = async (access_token: string) => {
-        const userInfoUrl = 'https://api.descope.com/oauth2/v1/userinfo';
+        let baseURL = "api.descope.com"
+        if (process.env.NEXT_PUBLIC_DESCOPE_PROJECT_ID.length >= 32) {
+        const localURL = process.env.NEXT_PUBLIC_DESCOPE_PROJECT_ID.substring(1, 5)
+        baseURL = [baseURL.slice(0, 4), localURL, ".", baseURL.slice(4)].join('') 
+        }
+        const userInfoUrl = `https://${baseURL}/oauth2/v1/userinfo`;
 
         const res = await fetch(userInfoUrl, {
         method: 'GET',
