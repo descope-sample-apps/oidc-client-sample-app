@@ -31,10 +31,11 @@ export async function GET(request: Request) {
 
     const { access_token, id_token, refresh_token, expires_in  } = data;
 
-    cookies().set('id_token', id_token, { httpOnly: true, secure: true, sameSite: 'lax' })
-    cookies().set('access_token', access_token, { httpOnly: true, secure: true, sameSite: 'lax' })
-    cookies().set('refresh_token', refresh_token, { httpOnly: true, secure: true, sameSite: 'lax' })
-    cookies().set('expires_in', expires_in, { httpOnly: true, secure: true, sameSite: 'lax' })
+    const cookieStore = await cookies();
+    cookieStore.set('id_token', id_token, { httpOnly: true, secure: true, sameSite: 'lax' })
+    cookieStore.set('access_token', access_token, { httpOnly: true, secure: true, sameSite: 'lax' })
+    cookieStore.set('refresh_token', refresh_token, { httpOnly: true, secure: true, sameSite: 'lax' })
+    cookieStore.set('expires_in', expires_in, { httpOnly: true, secure: true, sameSite: 'lax' })
 
 
     return new Response(null, {

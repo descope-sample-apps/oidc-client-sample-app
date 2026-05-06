@@ -6,23 +6,25 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "dependencies": {
+    "framer-motion": "^12.38.0",
     "jwt-decode": "^4.0.0",
-    "next": "14.2.32",
-    "react": "^18",
-    "react-dom": "^18"
+    "next": "^16.2.5",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
   },
   "devDependencies": {
-    "@types/node": "^24.0.0",
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^25.6.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "autoprefixer": "^10.0.1",
-    "eslint": "^10.0.0",
-    "eslint-config-next": "16.2.0",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "16.2.5",
     "postcss": "^8",
     "tailwindcss": "^4.0.0",
-    "typescript": "^5"
+    "typescript": "^6.0.3"
   }
 }

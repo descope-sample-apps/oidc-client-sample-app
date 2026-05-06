@@ -26,10 +26,17 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+.env
 .env*.local
 
 # vercel
 .vercel
+
+# nested experiments
+/next-js-sample-app/
+
+# oh-my-claudecode
+/.omc/
 
 # typescript
 *.tsbuildinfo
